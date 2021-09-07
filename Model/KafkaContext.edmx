@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище KafkaJobContext" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cashiers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shop" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="InsDt" Type="datetime" Nullable="false" />
+          <Property Name="InsUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CashiersRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Shop" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodeRole" Type="int" />
+          <Property Name="NameRole" Type="nvarchar" MaxLength="50" />
+          <Property Name="InsDt" Type="datetime" Nullable="false" />
+          <Property Name="System_User" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="500" />
+          <Property Name="Port" Type="nvarchar" MaxLength="10" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="100" />
+          <Property Name="Partition" Type="nvarchar" MaxLength="100" />
+          <Property Name="Broker" Type="nvarchar" MaxLength="100" />
+          <Property Name="Consumer" Type="nvarchar" MaxLength="100" />
+          <Property Name="InsUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="InsDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GetXml">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="XmlText" Type="nvarchar(max)" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="InsUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="500" />
+          <Property Name="Port" Type="nvarchar" MaxLength="10" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KafkaJob.dbo.SetXml" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SetXml">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="XmlText" Type="nvarchar(max)" />
+          <Property Name="InsUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="InsDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="Хранилище KafkaJobContextContainer">
+          <EntitySet Name="Cashiers" EntityType="Self.Cashiers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CashiersRole" EntityType="Self.CashiersRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GetXml" EntityType="Self.GetXml" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SetXml" EntityType="Self.SetXml" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SetXml].[Id] AS [Id], 
+    [SetXml].[XmlText] AS [XmlText], 
+    [SetXml].[InsUser] AS [InsUser], 
+    [SetXml].[InsDate] AS [InsDate]
+    FROM [dbo].[SetXml] AS [SetXml]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KafkaJobContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cashiers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InsDt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InsUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CashiersRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Shop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodeRole" Type="Int32" />
+          <Property Name="NameRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InsDt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="System_User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GetXml">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="XmlText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+          <Property Name="InsUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="KafkaJobEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cashiers" EntityType="Self.Cashiers" />
+          <EntitySet Name="CashiersRole" EntityType="Self.CashiersRole" />
+          <EntitySet Name="GetXml" EntityType="Self.GetXml" />
+          <EntitySet Name="Config" EntityType="KafkaJobContext.Config" />
+          <EntitySet Name="SetXml" EntityType="KafkaJobContext.SetXml" />
+        </EntityContainer>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Partition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Broker" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Consumer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InsUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SetXml">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="XmlText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InsDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KafkaJobContextContainer" CdmEntityContainer="KafkaJobEntities">
+          <EntitySetMapping Name="Cashiers">
+            <EntityTypeMapping TypeName="KafkaJobContext.Cashiers">
+              <MappingFragment StoreEntitySet="Cashiers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Shop" ColumnName="Shop" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InsDt" ColumnName="InsDt" />
+                <ScalarProperty Name="InsUser" ColumnName="InsUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CashiersRole">
+            <EntityTypeMapping TypeName="KafkaJobContext.CashiersRole">
+              <MappingFragment StoreEntitySet="CashiersRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Shop" ColumnName="Shop" />
+                <ScalarProperty Name="CodeRole" ColumnName="CodeRole" />
+                <ScalarProperty Name="NameRole" ColumnName="NameRole" />
+                <ScalarProperty Name="InsDt" ColumnName="InsDt" />
+                <ScalarProperty Name="System_User" ColumnName="System_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GetXml">
+            <EntityTypeMapping TypeName="KafkaJobContext.GetXml">
+              <MappingFragment StoreEntitySet="GetXml">
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="InsUser" ColumnName="InsUser" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="XmlText" ColumnName="XmlText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Config">
+            <EntityTypeMapping TypeName="KafkaJobContext.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="InsUser" ColumnName="InsUser" />
+                <ScalarProperty Name="Consumer" ColumnName="Consumer" />
+                <ScalarProperty Name="Broker" ColumnName="Broker" />
+                <ScalarProperty Name="Partition" ColumnName="Partition" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SetXml">
+            <EntityTypeMapping TypeName="KafkaJobContext.SetXml">
+              <MappingFragment StoreEntitySet="SetXml">
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="InsUser" ColumnName="InsUser" />
+                <ScalarProperty Name="XmlText" ColumnName="XmlText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
