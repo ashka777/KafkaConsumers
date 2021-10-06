@@ -14,7 +14,6 @@ namespace KafkaConsumers
         {
             Setting setting = new Setting();
             ConsumerOptions consumerOpt = setting.ConnectionSetting(args);
-            
             _ = new GetData(consumerOpt);
 
             Console.ReadKey();
